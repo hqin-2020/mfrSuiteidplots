@@ -118,7 +118,7 @@ chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1)
 
 folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h
 
-params['folderName']        = folder_name + '_quarter'
+params['folderName']        = folder_name + '_month'
 params['preLoad']           = folder_name
 
 #### Now, create a Model
@@ -158,7 +158,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Quarters')
+        axes[i].set_xlabel('Months')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.05,0.1])
@@ -166,7 +166,7 @@ axes[1].set_ylim([-0.05,0.1])
 axes[2].set_ylim([-0.01,0.01])
 fig.suptitle('Exposure elasticity for the Experts Consumption')
 fig.tight_layout()
-fig.savefig(plotdir + '/expoElasExperts_C_type1orgquarter.png')
+fig.savefig(plotdir + '/expoElasExperts_C_type1orgmonth.png')
 plt.close()
 
 ## Plot the exposure elasticity for consumption growth
@@ -185,7 +185,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Quarters')
+        axes[i].set_xlabel('Months')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.001,0.1])
@@ -193,7 +193,7 @@ axes[1].set_ylim([-0.005,0.1])
 axes[2].set_ylim([-0.01,0.01])
 fig.suptitle('Exposure elasticity for the Households Consumption')
 fig.tight_layout()
-fig.savefig(plotdir + '/expoElasHouseholdss_C_type1orgquarter.png')
+fig.savefig(plotdir + '/expoElasHouseholdss_C_type1orgmonth.png')
 plt.close()
 
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
@@ -211,7 +211,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Quarters')
+        axes[i].set_xlabel('Months')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.05,0.4])
@@ -219,7 +219,7 @@ axes[1].set_ylim([-0.05,0.4])
 axes[2].set_ylim([-0.05,0.05])
 fig.suptitle('Price elasticity for the Experts Consumption')
 fig.tight_layout()
-fig.savefig(plotdir + '/priceElasExperts_C_type1orgquarter.png')
+fig.savefig(plotdir + '/priceElasExperts_C_type1orgmonth.png')
 plt.close()
 
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
@@ -237,7 +237,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Quarters')
+        axes[i].set_xlabel('Months')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.005,0.5])
@@ -245,5 +245,5 @@ axes[1].set_ylim([-0.005,0.5])
 axes[2].set_ylim([-0.005,0.05])
 fig.suptitle('Price elasticity for the Households Consumption')
 fig.tight_layout()
-fig.savefig(plotdir + '/priceElasHouseholds_C_type1orgquarter.png')
+fig.savefig(plotdir + '/priceElasHouseholds_C_type1orgmonth.png')
 plt.close()
