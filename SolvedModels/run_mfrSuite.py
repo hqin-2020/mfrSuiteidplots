@@ -135,7 +135,7 @@ Model.printParams() ## This step is optional: it prints out the parameteres used
 end = time.time()
 
 Model.computeStatDent()
-
+Model.dumpData()
 Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 360, dt = 1, perturb = 'Ce')
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.json", 'wb') as file:   
