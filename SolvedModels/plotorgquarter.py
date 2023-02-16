@@ -118,7 +118,7 @@ chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1)
 
 folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h
 
-params['folderName']        = folder_name
+params['folderName']        = folder_name + '_quarter'
 params['preLoad']           = folder_name
 
 #### Now, create a Model
