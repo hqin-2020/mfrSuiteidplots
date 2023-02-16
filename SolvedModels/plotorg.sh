@@ -3,7 +3,7 @@
 nV=30
 nVtilde=0
 V_bar=1.0
-Vtilde_bar=1.0
+Vtilde_bar=0.0
 sigma_V_norm=0.132
 sigma_Vtilde_norm=0.0
 
