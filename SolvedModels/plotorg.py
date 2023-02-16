@@ -188,7 +188,7 @@ for i in range(len(plot_elas)):
         axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
-axes[0].set_ylim([-0.001,0.25])
+axes[0].set_ylim([-0.001,0.1])
 axes[1].set_ylim([-0.005,0.1])
 axes[2].set_ylim([-0.01,0.01])
 fig.suptitle('Exposure elasticity for the Households Consumption')
@@ -226,7 +226,7 @@ index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quan
 fig, axes = plt.subplots(1,3, figsize = (25,8))
 expo_elas_shock_0 = pd.DataFrame([np.arange(T),HouseholdsPriceConsumption.firstType[0,0,:],HouseholdsPriceConsumption.firstType[1,0,:],HouseholdsPriceConsumption.firstType[2,0,:]], index = index).T
 expo_elas_shock_1 = pd.DataFrame([np.arange(T),HouseholdsPriceConsumption.firstType[0,1,:],HouseholdsPriceConsumption.firstType[1,1,:],HouseholdsPriceConsumption.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),HouseholdsPriceConsumption.firstType[0,2,:],HouseholdsPriceConsumption.firstType[1,2,:],HouseholdsPriceConsumption.firstType[2,2,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-HouseholdsPriceConsumption.firstType[0,2,:],-HouseholdsPriceConsumption.firstType[1,2,:],-HouseholdsPriceConsumption.firstType[2,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
