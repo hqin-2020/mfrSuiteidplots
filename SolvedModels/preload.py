@@ -7,7 +7,7 @@ import json
 import pickle
 import itertools
 from scipy.interpolate import RegularGridInterpolator
-from shockElasm import computeElas
+from shockElasModules import computeElas
 
 parser = argparse.ArgumentParser(description="parameter settings")
 parser.add_argument("--nV",type=int,default=30)
@@ -120,123 +120,16 @@ chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1)
 
 folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h
 
-params['folderName']        = folder_name
-params['preLoad']           = folder_name
-
-#### Now, create a Model
-Model = m.Model(params)
-
-Model.solve()
-Model.computeStatDent()
-Model.dumpData()
-
-modelsol = {
-    'muCe' : Model.muCe(),
-    'muCh' : Model.muCh(),
-    'muSe' : Model.muSe(),
-    'muSh' : Model.muSh(),
-    'muX'  : Model.muX(),
-    'muNh'  : -0.5*np.sum([((1-Model.params['gamma_h'])/(Model.params['rho_h']-Model.params['gamma_h'])*\
-                                    (Model.sigmaSh()[:,s]+\
-                                     Model.params['rho_h']*Model.sigmaCh()[:,s]))**2\
-                                    for s in range(Model.params['nDims'])], axis = 0),
-    'muNe'  : -0.5*np.sum([((1-Model.params['gamma_e'])/(Model.params['rho_e']-Model.params['gamma_e'])*\
-                                    (Model.sigmaSe()[:,s]+\
-                                     Model.params['rho_e']*Model.sigmaCe()[:,s]))**2\
-                                    for s in range(Model.params['nDims'])], axis = 0),
-    'sigmaSe' : Model.sigmaSe(),
-    'sigmaSh' : Model.sigmaSh(),
-    'sigmaCe' : Model.sigmaCe(),
-    'sigmaCh' : Model.sigmaCh(),
-    'sigmaX'  : Model.sigmaXList,
-    'sigmaNh' : (1-Model.params['gamma_h'])/(Model.params['rho_h']-Model.params['gamma_h'])*\
-                                    (Model.sigmaSh()+\
-                                     Model.params['rho_h']*Model.sigmaCh()),
-    'sigmaNe' : (1-Model.params['gamma_e'])/(Model.params['rho_e']-Model.params['gamma_e'])*\
-                                    (Model.sigmaSe()+\
-                                     Model.params['rho_e']*Model.sigmaCe()),
-    'stateMatInput' : Model.stateMatInput,
-    'gridSizeList' : Model.gridSizeList,
-    'x0' : Model.x0,
-    'nDims' : Model.params['nDims'],
-    'nShocks' : Model.params['nShocks']
-}
-
-
 pcts = {'W':[.5],'Z':[.5],'V':[.25,.5,.75]}
 
 # 30 year time periods
 T = 360
-dt = 1/12
+dt = 1
 
 # Natural boundatry conditions
 bc = {'natural':True}
 
-# Use defaults starting points
-points = np.matrix([])
-
-## Create input stateMat for shock elasticities, a tuple of ranges of the state space
-Model.stateMatInput = []
-
-for i in range(Model.params['nDims']):
-    ## Note that i starts at zero but our variable names start at 1.
-    Model.stateMatInput.append(np.linspace(np.min(Model.stateMat.iloc[:,i]),
-                                np.max(Model.stateMat.iloc[:,i]),
-                                np.unique(np.array(Model.stateMat.iloc[:,i])).shape[0]) )
-## Create dictionary to store model
-if Model.model is None:
-    Model.model = {}
-
-allPcts = []
-
-## Find points
-if points.shape[1] == 0:
-    allPts = []
-    for stateVar in Model.stateVarList:
-        if Model.dent is None or np.max(Model.dent) < 0.0001:
-            raise Exception("Stationary density not computed or degenerate.")
-        allPts.append([Model.inverseCDFs[stateVar](pct) for pct in pcts[stateVar]])
-        allPcts.append(pcts[stateVar])
-    Model.x0 = np.matrix(list(itertools.product(*allPts)))
-    allPcts = [list(x) for x in list(itertools.product(*allPcts))]
-    Model.pcts = pcts
-else:
-    Model.x0 = points
-
-modelsol = {
-    'muCe' : Model.muCe(),
-    'muCh' : Model.muCh(),
-    'muSe' : Model.muSe(),
-    'muSh' : Model.muSh(),
-    'muX'  : Model.muX(),
-    'muNh'  : -0.5*np.sum([((1-Model.params['gamma_h'])/(Model.params['rho_h']-Model.params['gamma_h'])*\
-                                    (Model.sigmaSh()[:,s]+\
-                                     Model.params['rho_h']*Model.sigmaCh()[:,s]))**2\
-                                    for s in range(Model.params['nDims'])], axis = 0),
-    'muNe'  : -0.5*np.sum([((1-Model.params['gamma_e'])/(Model.params['rho_e']-Model.params['gamma_e'])*\
-                                    (Model.sigmaSe()[:,s]+\
-                                     Model.params['rho_e']*Model.sigmaCe()[:,s]))**2\
-                                    for s in range(Model.params['nDims'])], axis = 0),
-    'sigmaSe' : Model.sigmaSe(),
-    'sigmaSh' : Model.sigmaSh(),
-    'sigmaCe' : Model.sigmaCe(),
-    'sigmaCh' : Model.sigmaCh(),
-    'sigmaX'  : Model.sigmaXList,
-    'sigmaNh' : (1-Model.params['gamma_h'])/(Model.params['rho_h']-Model.params['gamma_h'])*\
-                                    (Model.sigmaSh()+\
-                                     Model.params['rho_h']*Model.sigmaCh()),
-    'sigmaNe' : (1-Model.params['gamma_e'])/(Model.params['rho_e']-Model.params['gamma_e'])*\
-                                    (Model.sigmaSe()+\
-                                     Model.params['rho_e']*Model.sigmaCe()),
-    'stateMatInput' : Model.stateMatInput,
-    'gridSizeList' : Model.gridSizeList,
-    'x0' : Model.x0,
-    'nDims' : Model.params['nDims'],
-    'nShocks' : Model.params['nShocks']
-}
-
-with open(os.getcwd()+'/' + folder_name + '/model_ela_sol.pkl', 'wb') as file:
-    pickle.dump(modelsol,file)
+modelsol = pickle.load(open(os.getcwd()+"/" + folder_name + "/model_ela_sol.pkl", "rb"))
 
 muXs = [RegularGridInterpolator(modelsol['stateMatInput'], modelsol['muX'][:,n].reshape(modelsol['gridSizeList'], order = 'F')) for n in range(modelsol['nDims'])]
 muCe = RegularGridInterpolator(modelsol['stateMatInput'], modelsol['muCe'].reshape(modelsol['gridSizeList'], order = 'F'))
@@ -266,20 +159,16 @@ sigmaShfn = lambda x: np.transpose([vol(x) for vol in sigmaSh])
 sigmaNefn = lambda x: np.transpose([vol(x) for vol in sigmaNe])
 sigmaNhfn = lambda x: np.transpose([vol(x) for vol in sigmaNh])
 
-bc = {'natural':True}
-dt = 1/12
-T = 360
-
-modelInput = {'muX':muXfn, 'sigmaX':sigmaXfn, 'muG':muCe, 'sigmaG':sigmaCefn, 'muS':muSe, 'sigmaS':sigmaSefn, 'dt':dt, 'T' :T}
+modelInput = {'muX':muXfn, 'sigmaX':sigmaXfn, 'muC':muCe, 'sigmaC':sigmaCefn, 'muS':muSe, 'sigmaS':sigmaSefn, 'dt':dt, 'T' :T}
 expoElasExpertsC, priceElasExpertsC, _, _, costElasExpertsC, phit1ExpertsC, phit2ExpertsC = computeElas(modelsol['stateMatInput'], modelInput, bc, modelsol['x0'])
 
-modelInput = {'muX':muXfn, 'sigmaX':sigmaXfn, 'muG':muCe, 'sigmaG':sigmaCefn, 'muS':muNe, 'sigmaS':sigmaNefn, 'dt':dt, 'T':T}
+modelInput = {'muX':muXfn, 'sigmaX':sigmaXfn, 'muC':muCe, 'sigmaC':sigmaCefn, 'muS':muNe, 'sigmaS':sigmaNefn, 'dt':dt, 'T':T}
 expoElasExpertsN, priceElasExpertsN, _, _, costElasExpertsN, phit1ExpertsN, phit2ExpertsN = computeElas(modelsol['stateMatInput'], modelInput, bc, modelsol['x0'])
 
-modelInput = {'muX':muXfn, 'sigmaX':sigmaXfn, 'muG':muCh, 'sigmaG':sigmaChfn, 'muS':muSh, 'sigmaS':sigmaShfn, 'dt':dt, 'T':T}
+modelInput = {'muX':muXfn, 'sigmaX':sigmaXfn, 'muC':muCh, 'sigmaC':sigmaChfn, 'muS':muSh, 'sigmaS':sigmaShfn, 'dt':dt, 'T':T}
 expoElasHouseholdsC, priceElasHouseholdsC, _, _, costElasHouseholdsC, phit1HouseholdsC, phit2HouseholdsC = computeElas(modelsol['stateMatInput'], modelInput, bc, modelsol['x0'])
 
-modelInput = {'muX':muXfn, 'sigmaX':sigmaXfn, 'muG':muCh, 'sigmaG':sigmaChfn, 'muS':muNh, 'sigmaS':sigmaNhfn, 'dt':dt, 'T':T}
+modelInput = {'muX':muXfn, 'sigmaX':sigmaXfn, 'muC':muCh, 'sigmaC':sigmaChfn, 'muS':muNh, 'sigmaS':sigmaNhfn, 'dt':dt, 'T':T}
 expoElasHouseholdsN, priceElasHouseholdsN, _, _, costElassHouseholdsN, phit1HouseholdsN, phit2HouseholdsN = computeElas(modelsol['stateMatInput'], modelInput, bc, modelsol['x0'])
 
 elasol = {'expoElasExpertsC':expoElasExpertsC,

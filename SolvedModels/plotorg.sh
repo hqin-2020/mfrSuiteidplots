@@ -23,7 +23,7 @@ do
     do
         for a_h in -1 0.05 0.10 0.13
         do
-            for gamma_e in 4.0
+            for gamma_e in 2.0 3.0 4.0
             do
                 for gamma_h in 6.0 8.0
                 do
@@ -67,7 +67,7 @@ do
 
 module load python/anaconda-2021.05
 
-python3 /project/lhansen/mfrSuiteidplots/SolvedModels/plot.py --chiUnderline ${chiUnderline} --a_e ${a_e} --a_h ${a_h} --gamma_e ${gamma_e} --gamma_h ${gamma_h} --psi_e ${psi_e} --psi_h ${psi_h} \
+python3 /project/lhansen/mfrSuiteidplots/SolvedModels/plotorg.py --chiUnderline ${chiUnderline} --a_e ${a_e} --a_h ${a_h} --gamma_e ${gamma_e} --gamma_h ${gamma_h} --psi_e ${psi_e} --psi_h ${psi_h} \
                                                     --nV ${nV} --nVtilde ${nVtilde} --V_bar ${V_bar} --Vtilde_bar ${Vtilde_bar} --sigma_V_norm ${sigma_V_norm} --sigma_Vtilde_norm ${sigma_Vtilde_norm} \
 
 EOF
