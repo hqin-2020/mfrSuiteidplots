@@ -62,7 +62,7 @@ do
 #SBATCH --time=0-10:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=28
+#SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=2000
 
 module load python/anaconda-2021.05
