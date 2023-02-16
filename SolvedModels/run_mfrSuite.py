@@ -203,6 +203,7 @@ else:
     Model.x0 = points
 
 modelsol = {
+    'dent' : Model.dent,
     'muCe' : Model.muCe(),
     'muCh' : Model.muCh(),
     'muSe' : Model.muSe(),
