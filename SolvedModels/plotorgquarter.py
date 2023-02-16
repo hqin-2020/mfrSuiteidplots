@@ -166,7 +166,7 @@ axes[1].set_ylim([-0.05,0.1])
 axes[2].set_ylim([-0.01,0.01])
 fig.suptitle('Exposure elasticity for the Experts Consumption')
 fig.tight_layout()
-fig.savefig(plotdir + '/expoElasExperts_C_type1org.png')
+fig.savefig(plotdir + '/expoElasExperts_C_type1orgquarter.png')
 plt.close()
 
 ## Plot the exposure elasticity for consumption growth
@@ -193,7 +193,7 @@ axes[1].set_ylim([-0.005,0.1])
 axes[2].set_ylim([-0.01,0.01])
 fig.suptitle('Exposure elasticity for the Households Consumption')
 fig.tight_layout()
-fig.savefig(plotdir + '/expoElasHouseholdss_C_type1org.png')
+fig.savefig(plotdir + '/expoElasHouseholdss_C_type1orgquarter.png')
 plt.close()
 
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
@@ -219,7 +219,7 @@ axes[1].set_ylim([-0.05,0.4])
 axes[2].set_ylim([-0.05,0.05])
 fig.suptitle('Price elasticity for the Experts Consumption')
 fig.tight_layout()
-fig.savefig(plotdir + '/priceElasExperts_C_type1org.png')
+fig.savefig(plotdir + '/priceElasExperts_C_type1orgquarter.png')
 plt.close()
 
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
@@ -245,5 +245,5 @@ axes[1].set_ylim([-0.005,0.5])
 axes[2].set_ylim([-0.005,0.05])
 fig.suptitle('Price elasticity for the Households Consumption')
 fig.tight_layout()
-fig.savefig(plotdir + '/priceElasHouseholds_C_type1org.png')
+fig.savefig(plotdir + '/priceElasHouseholds_C_type1orgquarter.png')
 plt.close()
