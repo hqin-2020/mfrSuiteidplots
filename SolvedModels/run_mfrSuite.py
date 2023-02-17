@@ -156,7 +156,7 @@ end = time.time()
 solve_time = '{:.4f}'.format((end - start)/60)
 MFR_time_info = {'solve_time': solve_time}
 
-with open(os.getcwd()+"/" + folder_name + "/MFR_time_info.json", "w") as f:
+with open(os.getcwd()+"/" + folder_name + "/Ela_time_info.json", "w") as f:
     json.dump(MFR_time_info,f)
 
 
