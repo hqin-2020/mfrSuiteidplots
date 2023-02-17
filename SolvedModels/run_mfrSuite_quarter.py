@@ -139,20 +139,20 @@ Model.dumpData()
 
 start = time.time()
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 192, dt = 1/4, perturb = 'Ce')
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 192, dt = 1/4, perturb = 'Ce', bc = {'natural': True})
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasExperts, file)
 
-# Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 192, dt = 1/4, perturb = 'Ch')
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 192, dt = 1/4, perturb = 'Ch', bc = {'natural': True})
 
-# with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
-#     pickle.dump(Model.expoElas, file)
+with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
+    pickle.dump(Model.expoElas, file)
 
-# with open(os.getcwd()+"/" + folder_name + "/HouseholdsPriceConsumption.pkl", 'wb') as file:   
-#     pickle.dump(Model.priceElasHouseholds, file)
+with open(os.getcwd()+"/" + folder_name + "/HouseholdsPriceConsumption.pkl", 'wb') as file:   
+    pickle.dump(Model.priceElasHouseholds, file)
 end = time.time()
 
 solve_time = '{:.4f}'.format((end - start)/60)
