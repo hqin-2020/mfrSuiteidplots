@@ -137,7 +137,7 @@ end = time.time()
 
 Model.computeStatDent()
 Model.dumpData()
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 360, dt = 1, perturb = 'Ce')
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 600, dt = 1/12, perturb = 'Ce')
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
@@ -145,7 +145,7 @@ with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') a
 with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasExperts, file)
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 360, dt = 1, perturb = 'Ch')
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 600, dt = 1/12, perturb = 'Ch')
 
 with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
