@@ -153,7 +153,7 @@ with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') 
 
 # with open(os.getcwd()+"/" + folder_name + "/HouseholdsPriceConsumption.pkl", 'wb') as file:   
 #     pickle.dump(Model.priceElasHouseholds, file)
-# end = time.time()
+end = time.time()
 
 solve_time = '{:.4f}'.format((end - start)/60)
 MFR_time_info = {'solve_time': solve_time}
