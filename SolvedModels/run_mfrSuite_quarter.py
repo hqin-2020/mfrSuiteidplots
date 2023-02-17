@@ -129,36 +129,38 @@ Model = m.Model(params)
 #------------------------------------------#
 
 #### This step is very simple: use the .solve() method.
-start = time.time()
+
 Model.solve()
 Model.printInfo() ## This step is optional: it prints out information regarding time, number of iterations, etc.
 Model.printParams() ## This step is optional: it prints out the parameteres used.
-end = time.time()
 
 Model.computeStatDent()
 Model.dumpData()
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 200, dt = 1/4, perturb = 'Ce')
 
+start = time.time()
+
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 192, dt = 1/4, perturb = 'Ce')
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasExperts, file)
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 200, dt = 1/4, perturb = 'Ch')
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 192, dt = 1/4, perturb = 'Ch')
 
 with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
 
 with open(os.getcwd()+"/" + folder_name + "/HouseholdsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasHouseholds, file)
+end = time.time()
 
-Model.dumpData()
 solve_time = '{:.4f}'.format((end - start)/60)
 MFR_time_info = {'solve_time': solve_time}
-with open(os.getcwd()+"/" + folder_name + "/MFR_time_info.json", "w") as f:
+with open(os.getcwd()+"/" + folder_name + "/Ela_time_info.json", "w") as f:
     json.dump(MFR_time_info,f)
 
+Model.dumpData()
 # %%
 
 

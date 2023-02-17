@@ -136,6 +136,8 @@ end = time.time()
 
 Model.computeStatDent()
 Model.dumpData()
+
+
 Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 360, dt = 1, perturb = 'Ce')
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
@@ -155,6 +157,7 @@ with open(os.getcwd()+"/" + folder_name + "/HouseholdsPriceConsumption.pkl", 'wb
 Model.dumpData()
 solve_time = '{:.4f}'.format((end - start)/60)
 MFR_time_info = {'solve_time': solve_time}
+
 with open(os.getcwd()+"/" + folder_name + "/MFR_time_info.json", "w") as f:
     json.dump(MFR_time_info,f)
 
