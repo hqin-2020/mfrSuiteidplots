@@ -23,7 +23,7 @@ do
     do
         for a_h in -1
         do
-            for gamma_e in 2.0 3.0 4.0
+            for gamma_e in 4.0
             do
                 for gamma_h in 6.0 8.0
                 do
