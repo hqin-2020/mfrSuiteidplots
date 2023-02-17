@@ -119,6 +119,7 @@ chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1)
 
 folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h
 
+params['preLoad']          = folder_name 
 params['folderName']        = folder_name
 
 #### Now, create a Model
@@ -136,7 +137,8 @@ Model.computeStatDent()
 Model.dumpData()
 
 start = time.time()
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ce')
+
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ce', bc = {'natural': True})
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
@@ -144,13 +146,13 @@ with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') a
 with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasExperts, file)
 
-# Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ch')
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ch', bc = {'natural': True})
 
-# with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
-#     pickle.dump(Model.expoElas, file)
+with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
+    pickle.dump(Model.expoElas, file)
 
-# with open(os.getcwd()+"/" + folder_name + "/HouseholdsPriceConsumption.pkl", 'wb') as file:   
-#     pickle.dump(Model.priceElasHouseholds, file)
+with open(os.getcwd()+"/" + folder_name + "/HouseholdsPriceConsumption.pkl", 'wb') as file:   
+    pickle.dump(Model.priceElasHouseholds, file)
 end = time.time()
 
 solve_time = '{:.4f}'.format((end - start)/60)
@@ -160,83 +162,83 @@ with open(os.getcwd()+"/" + folder_name + "/Ela_time_info.json", "w") as f:
     json.dump(MFR_time_info,f)
 
 
-Model.dumpData()
-# %%
+# Model.dumpData()
+# # %%
 
 
-##### This method can only be called after the model is solved.
-pcts = {'W':[.5],'Z':[.5],'V':[.25,.5,.75]}
+# ##### This method can only be called after the model is solved.
+# pcts = {'W':[.5],'Z':[.5],'V':[.25,.5,.75]}
 
-# 30 year time periods
-T = 360
-dt = 1
+# # 30 year time periods
+# T = 360
+# dt = 1
 
-# Natural boundatry conditions
-bc = {'natural':True}
+# # Natural boundatry conditions
+# bc = {'natural':True}
 
-# Use defaults starting points
-points = np.matrix([])
+# # Use defaults starting points
+# points = np.matrix([])
 
-## Create input stateMat for shock elasticities, a tuple of ranges of the state space
-Model.stateMatInput = []
+# ## Create input stateMat for shock elasticities, a tuple of ranges of the state space
+# Model.stateMatInput = []
 
-for i in range(Model.params['nDims']):
-    ## Note that i starts at zero but our variable names start at 1.
-    Model.stateMatInput.append(np.linspace(np.min(Model.stateMat.iloc[:,i]),
-                                np.max(Model.stateMat.iloc[:,i]),
-                                np.unique(np.array(Model.stateMat.iloc[:,i])).shape[0]) )
-## Create dictionary to store model
-if Model.model is None:
-    Model.model = {}
+# for i in range(Model.params['nDims']):
+#     ## Note that i starts at zero but our variable names start at 1.
+#     Model.stateMatInput.append(np.linspace(np.min(Model.stateMat.iloc[:,i]),
+#                                 np.max(Model.stateMat.iloc[:,i]),
+#                                 np.unique(np.array(Model.stateMat.iloc[:,i])).shape[0]) )
+# ## Create dictionary to store model
+# if Model.model is None:
+#     Model.model = {}
 
-allPcts = []
+# allPcts = []
 
-## Find points
-if points.shape[1] == 0:
-    allPts = []
-    for stateVar in Model.stateVarList:
-        if Model.dent is None or np.max(Model.dent) < 0.0001:
-            raise Exception("Stationary density not computed or degenerate.")
-        allPts.append([Model.inverseCDFs[stateVar](pct) for pct in pcts[stateVar]])
-        allPcts.append(pcts[stateVar])
-    Model.x0 = np.matrix(list(itertools.product(*allPts)))
-    allPcts = [list(x) for x in list(itertools.product(*allPcts))]
-    Model.pcts = pcts
-else:
-    Model.x0 = points
+# ## Find points
+# if points.shape[1] == 0:
+#     allPts = []
+#     for stateVar in Model.stateVarList:
+#         if Model.dent is None or np.max(Model.dent) < 0.0001:
+#             raise Exception("Stationary density not computed or degenerate.")
+#         allPts.append([Model.inverseCDFs[stateVar](pct) for pct in pcts[stateVar]])
+#         allPcts.append(pcts[stateVar])
+#     Model.x0 = np.matrix(list(itertools.product(*allPts)))
+#     allPcts = [list(x) for x in list(itertools.product(*allPcts))]
+#     Model.pcts = pcts
+# else:
+#     Model.x0 = points
 
-modelsol = {
-    'dent' : Model.dent,
-    'muCe' : Model.muCe(),
-    'muCh' : Model.muCh(),
-    'muSe' : Model.muSe(),
-    'muSh' : Model.muSh(),
-    'muX'  : Model.muX(),
-    'muNh'  : -0.5*np.sum([((1-Model.params['gamma_h'])/(Model.params['rho_h']-Model.params['gamma_h'])*\
-                                    (Model.sigmaSh()[:,s]+\
-                                     Model.params['rho_h']*Model.sigmaCh()[:,s]))**2\
-                                    for s in range(Model.params['nDims'])], axis = 0),
-    'muNe'  : -0.5*np.sum([((1-Model.params['gamma_e'])/(Model.params['rho_e']-Model.params['gamma_e'])*\
-                                    (Model.sigmaSe()[:,s]+\
-                                     Model.params['rho_e']*Model.sigmaCe()[:,s]))**2\
-                                    for s in range(Model.params['nDims'])], axis = 0),
-    'sigmaSe' : Model.sigmaSe(),
-    'sigmaSh' : Model.sigmaSh(),
-    'sigmaCe' : Model.sigmaCe(),
-    'sigmaCh' : Model.sigmaCh(),
-    'sigmaX'  : Model.sigmaXList,
-    'sigmaNh' : (1-Model.params['gamma_h'])/(Model.params['rho_h']-Model.params['gamma_h'])*\
-                                    (Model.sigmaSh()+\
-                                     Model.params['rho_h']*Model.sigmaCh()),
-    'sigmaNe' : (1-Model.params['gamma_e'])/(Model.params['rho_e']-Model.params['gamma_e'])*\
-                                    (Model.sigmaSe()+\
-                                     Model.params['rho_e']*Model.sigmaCe()),
-    'stateMatInput' : Model.stateMatInput,
-    'gridSizeList' : Model.gridSizeList,
-    'x0' : Model.x0,
-    'nDims' : Model.params['nDims'],
-    'nShocks' : Model.params['nShocks']
-}
+# modelsol = {
+#     'dent' : Model.dent,
+#     'muCe' : Model.muCe(),
+#     'muCh' : Model.muCh(),
+#     'muSe' : Model.muSe(),
+#     'muSh' : Model.muSh(),
+#     'muX'  : Model.muX(),
+#     'muNh'  : -0.5*np.sum([((1-Model.params['gamma_h'])/(Model.params['rho_h']-Model.params['gamma_h'])*\
+#                                     (Model.sigmaSh()[:,s]+\
+#                                      Model.params['rho_h']*Model.sigmaCh()[:,s]))**2\
+#                                     for s in range(Model.params['nDims'])], axis = 0),
+#     'muNe'  : -0.5*np.sum([((1-Model.params['gamma_e'])/(Model.params['rho_e']-Model.params['gamma_e'])*\
+#                                     (Model.sigmaSe()[:,s]+\
+#                                      Model.params['rho_e']*Model.sigmaCe()[:,s]))**2\
+#                                     for s in range(Model.params['nDims'])], axis = 0),
+#     'sigmaSe' : Model.sigmaSe(),
+#     'sigmaSh' : Model.sigmaSh(),
+#     'sigmaCe' : Model.sigmaCe(),
+#     'sigmaCh' : Model.sigmaCh(),
+#     'sigmaX'  : Model.sigmaXList,
+#     'sigmaNh' : (1-Model.params['gamma_h'])/(Model.params['rho_h']-Model.params['gamma_h'])*\
+#                                     (Model.sigmaSh()+\
+#                                      Model.params['rho_h']*Model.sigmaCh()),
+#     'sigmaNe' : (1-Model.params['gamma_e'])/(Model.params['rho_e']-Model.params['gamma_e'])*\
+#                                     (Model.sigmaSe()+\
+#                                      Model.params['rho_e']*Model.sigmaCe()),
+#     'stateMatInput' : Model.stateMatInput,
+#     'gridSizeList' : Model.gridSizeList,
+#     'x0' : Model.x0,
+#     'nDims' : Model.params['nDims'],
+#     'nShocks' : Model.params['nShocks']
+# }
 
-with open(os.getcwd()+"/" + folder_name + "/model_ela_sol.pkl", "wb") as f:
-    pickle.dump(modelsol,f)
+# with open(os.getcwd()+"/" + folder_name + "/model_ela_sol.pkl", "wb") as f:
+#     pickle.dump(modelsol,f)
