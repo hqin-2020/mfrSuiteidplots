@@ -117,9 +117,10 @@ a_e = str("{:0.3f}".format(params['a_e'])).replace('.', '', 1)
 a_h = str("{:0.3f}".format(params['a_h'])).replace('.', '', 1) 
 chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1) 
 
-folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h + '_month'
+folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h 
 
 params['preLoad']          = folder_name 
+folder_name = folder_name + '_month'
 params['folderName']       = folder_name 
 
 #### Now, create a Model
@@ -129,24 +130,28 @@ Model = m.Model(params)
 #------------------------------------------#
 
 #### This step is very simple: use the .solve() method.
-
+start = time.time()
 Model.solve()
 Model.printInfo() ## This step is optional: it prints out information regarding time, number of iterations, etc.
 Model.printParams() ## This step is optional: it prints out the parameteres used.
-
 Model.computeStatDent()
 Model.dumpData()
+end = time.time()
+solve_time = '{:.4f}'.format((end - start)/60)
+MFR_time_info = {'solve_time': solve_time}
+with open(os.getcwd()+"/" + folder_name + "/MFR_time_info.json", "w") as f:
+    json.dump(MFR_time_info,f)
 
-
+# %%
 start = time.time()
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 576, dt = 1/12, perturb = 'Ce', bc = {'natural': True})
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48*12, dt = 1/12, perturb = 'Ce', bc = {'natural': True})
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasExperts, file)
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 576, dt = 1/12, perturb = 'Ch', bc = {'natural': True})
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48*12, dt = 1/12, perturb = 'Ch', bc = {'natural': True})
 
 with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
@@ -162,16 +167,8 @@ with open(os.getcwd()+"/" + folder_name + "/Ela_time_info.json", "w") as f:
 Model.dumpData()
 # %%
 
-
 ##### This method can only be called after the model is solved.
 pcts = {'W':[.5],'Z':[.5],'V':[.25,.5,.75]}
-
-# 30 year time periods
-T = 180
-dt = 1/12
-
-# Natural boundatry conditions
-bc = {'natural':True}
 
 # Use defaults starting points
 points = np.matrix([])
