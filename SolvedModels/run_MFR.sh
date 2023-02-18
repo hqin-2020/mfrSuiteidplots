@@ -43,7 +43,7 @@ do
 #SBATCH --job-name=runyear
 #SBATCH --output=./job-outs/$domain_folder/$model_folder/runyear.out
 #SBATCH --error=./job-outs/$domain_folder/$model_folder/runyear.err
-#SBATCH --time=0-5:00:00
+#SBATCH --time=0-12:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=14

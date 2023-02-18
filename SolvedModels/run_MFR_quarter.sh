@@ -43,10 +43,10 @@ do
 #SBATCH --job-name=runquarter
 #SBATCH --output=./job-outs/$domain_folder/$model_folder/runquarter.out
 #SBATCH --error=./job-outs/$domain_folder/$model_folder/runquarter.err
-#SBATCH --time=0-5:00:00
+#SBATCH --time=0-12:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=14
 #SBATCH --mem-per-cpu=4000
 
 module load python/anaconda-2021.05
