@@ -129,13 +129,19 @@ Model = m.Model(params)
 #------------------------------------------#
 
 #### This step is very simple: use the .solve() method.
-
+start = time.time()
 Model.solve()
 Model.printInfo() ## This step is optional: it prints out information regarding time, number of iterations, etc.
 Model.printParams() ## This step is optional: it prints out the parameteres used.
 Model.computeStatDent()
 Model.dumpData()
+end = time.time()
+solve_time = '{:.4f}'.format((end - start)/60)
+MFR_time_info = {'solve_time': solve_time}
+with open(os.getcwd()+"/" + folder_name + "/MFR_time_info.json", "w") as f:
+    json.dump(MFR_time_info,f)
 
+# %%
 start = time.time()
 
 Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ce', bc = {'natural': True})
