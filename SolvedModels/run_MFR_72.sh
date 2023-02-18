@@ -43,7 +43,7 @@ do
 #SBATCH --job-name=run72
 #SBATCH --output=./job-outs/$domain_folder/$model_folder/run72.out
 #SBATCH --error=./job-outs/$domain_folder/$model_folder/run72.err
-#SBATCH --time=0-12:00:00
+#SBATCH --time=0-24:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
