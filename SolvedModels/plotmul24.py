@@ -116,7 +116,7 @@ a_e = str("{:0.3f}".format(params['a_e'])).replace('.', '', 1)
 a_h = str("{:0.3f}".format(params['a_h'])).replace('.', '', 1) 
 chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1) 
 
-folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h
+folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h +'_24'
 
 params['folderName']        = folder_name
 params['preLoad']           = folder_name
@@ -149,7 +149,7 @@ import seaborn as sns
 import pandas as pd
 pd.options.display.float_format = '{:.3g}'.format
 sns.set(font_scale = 1.5)
-T = 48
+T = 48*24
 # Calculate the shock elasticity at 0.25, 0.5 and 0.75 quantile for W
 quantile = [0.25, 0.5, 0.75]
 
@@ -169,7 +169,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Years')
+        axes[i].set_xlabel('Half Months')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.05,0.1])
@@ -196,7 +196,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Years')
+        axes[i].set_xlabel('Half Months')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.001,0.1])
@@ -222,7 +222,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Years')
+        axes[i].set_xlabel('Half Months')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.05,0.4])
@@ -248,7 +248,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Years')
+        axes[i].set_xlabel('Half Months')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.005,0.5])
@@ -275,7 +275,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Years')
+        axes[i].set_xlabel('Half Months')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.01,0.2])
@@ -302,7 +302,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Years')
+        axes[i].set_xlabel('Half Months')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.005,0.2])
@@ -330,7 +330,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Years')
+        axes[i].set_xlabel('Half Months')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.01,0.4])
@@ -358,7 +358,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Years')
+        axes[i].set_xlabel('Half Months')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.01,0.4])
