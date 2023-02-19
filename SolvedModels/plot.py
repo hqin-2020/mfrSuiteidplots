@@ -124,40 +124,41 @@ params['preLoad']           = folder_name
 #### Now, create a Model
 Model = m.Model(params)
 
-model_ela_sol = pickle.load(open(os.getcwd()+"/" + folder_name + "/model_ela_dataa3.pkl", "rb"))
+model_ela_sol = pickle.load(open(os.getcwd()+"/" + folder_name + "/model_ela_data.pkl", "rb"))
 os.makedirs(os.getcwd()+"/plots/" + folder_name, exist_ok = True)
 plotdir = os.getcwd()+"/plots/" + folder_name
 
-expoElasExpertsC = model_ela_sol['expoElasExpertsC']
-priceElasExpertsC = model_ela_sol['priceElasExpertsC']
+expoElasExperts = model_ela_sol['expoElasExperts']
+priceElasExperts = model_ela_sol['priceElasExperts']
+costElasExperts = model_ela_sol['costElasExperts']
+
+expoElasHouseholds = model_ela_sol['expoElasHouseholds']
+priceElasHouseholds = model_ela_sol['priceElasHouseholds']
+costElasHouseholds = model_ela_sol['costElasHouseholds']
+
 expoElasExpertsN = model_ela_sol['expoElasExpertsN']
 priceElasExpertsN = model_ela_sol['priceElasExpertsN']
+costElasExpertsN = model_ela_sol['costElasExpertsN']
 
-expoElasHouseholdsC = model_ela_sol['expoElasHouseholdsC']
-priceElasHouseholdsC = model_ela_sol['priceElasHouseholdsC']
 expoElasHouseholdsN = model_ela_sol['expoElasHouseholdsN']
 priceElasHouseholdsN = model_ela_sol['priceElasHouseholdsN']
-
-costElasExpertsC = model_ela_sol['costElasExpertsC']
-costElasExpertsN = model_ela_sol['costElasExpertsN']
-costElasHouseholdsC = model_ela_sol['costElasHouseholdsC']
-costElassHouseholdsN = model_ela_sol['costElassHouseholdsN']
+costElasHouseholdsN = model_ela_sol['costElasHouseholdsN']
 
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 pd.options.display.float_format = '{:.3g}'.format
 sns.set(font_scale = 1.5)
-T = 360
+T = 48
 # Calculate the shock elasticity at 0.25, 0.5 and 0.75 quantile for W
 quantile = [0.25, 0.5, 0.75]
 
-## Plot the exposure elasticity for consumption growth
+
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),expoElasExpertsC.firstType[0,0,:],expoElasExpertsC.firstType[1,0,:],expoElasExpertsC.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),expoElasExpertsC.firstType[0,1,:],expoElasExpertsC.firstType[1,1,:],expoElasExpertsC.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),expoElasExpertsC.firstType[0,2,:],expoElasExpertsC.firstType[1,2,:],expoElasExpertsC.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,0,:],expoElasExperts.firstType[1,0,:],expoElasExperts.firstType[2,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,1,:],expoElasExperts.firstType[1,1,:],expoElasExperts.firstType[2,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,2,:],expoElasExperts.firstType[1,2,:],expoElasExperts.firstType[2,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
@@ -168,7 +169,7 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Months')
+        axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.05,0.1])
@@ -179,12 +180,12 @@ fig.tight_layout()
 fig.savefig(plotdir + '/expoElasExperts_C_type1.png')
 plt.close()
 
-## Plot the exposure elasticity for consumption growth
+
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),expoElasHouseholdsC.firstType[0,0,:],expoElasHouseholdsC.firstType[1,0,:],expoElasHouseholdsC.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),expoElasHouseholdsC.firstType[0,1,:],expoElasHouseholdsC.firstType[1,1,:],expoElasHouseholdsC.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),expoElasHouseholdsC.firstType[0,2,:],expoElasHouseholdsC.firstType[1,2,:],expoElasHouseholdsC.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,0,:],expoElasHouseholds.firstType[1,0,:],expoElasHouseholds.firstType[2,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,1,:],expoElasHouseholds.firstType[1,1,:],expoElasHouseholds.firstType[2,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,2,:],expoElasHouseholds.firstType[1,2,:],expoElasHouseholds.firstType[2,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
@@ -195,10 +196,10 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Months')
+        axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
-axes[0].set_ylim([-1.5,0.5])
+axes[0].set_ylim([-0.001,0.1])
 axes[1].set_ylim([-0.005,0.1])
 axes[2].set_ylim([-0.01,0.01])
 fig.suptitle('Exposure elasticity for the Households Consumption')
@@ -208,9 +209,9 @@ plt.close()
 
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasExpertsC.firstType[0,0,:],priceElasExpertsC.firstType[1,0,:],priceElasExpertsC.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasExpertsC.firstType[0,1,:],priceElasExpertsC.firstType[1,1,:],priceElasExpertsC.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasExpertsC.firstType[0,2,:],-priceElasExpertsC.firstType[1,2,:],-priceElasExpertsC.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasExperts.firstType[0,0,:],priceElasExperts.firstType[1,0,:],priceElasExperts.firstType[2,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasExperts.firstType[0,1,:],priceElasExperts.firstType[1,1,:],priceElasExperts.firstType[2,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasExperts.firstType[0,2,:],-priceElasExperts.firstType[1,2,:],-priceElasExperts.firstType[2,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
@@ -221,12 +222,12 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Months')
+        axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.05,0.4])
 axes[1].set_ylim([-0.05,0.4])
-axes[2].set_ylim([-0.05,0.1])
+axes[2].set_ylim([-0.05,0.05])
 fig.suptitle('Price elasticity for the Experts Consumption')
 fig.tight_layout()
 fig.savefig(plotdir + '/priceElasExperts_C_type1.png')
@@ -234,9 +235,9 @@ plt.close()
 
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholdsC.firstType[0,0,:],priceElasHouseholdsC.firstType[1,0,:],priceElasHouseholdsC.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholdsC.firstType[0,1,:],priceElasHouseholdsC.firstType[1,1,:],priceElasHouseholdsC.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),priceElasHouseholdsC.firstType[0,2,:],priceElasHouseholdsC.firstType[1,2,:],priceElasHouseholdsC.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholds.firstType[0,0,:],priceElasHouseholds.firstType[1,0,:],priceElasHouseholds.firstType[2,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholds.firstType[0,1,:],priceElasHouseholds.firstType[1,1,:],priceElasHouseholds.firstType[2,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholds.firstType[0,2,:],-priceElasHouseholds.firstType[1,2,:],-priceElasHouseholds.firstType[2,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
@@ -247,12 +248,12 @@ colors = ['green','red','blue']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Months')
+        axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
-axes[0].set_ylim([-0.005,2.0])
+axes[0].set_ylim([-0.005,0.5])
 axes[1].set_ylim([-0.005,0.5])
-axes[2].set_ylim([-0.005,2.0])
+axes[2].set_ylim([-0.005,0.05])
 fig.suptitle('Price elasticity for the Households Consumption')
 fig.tight_layout()
 fig.savefig(plotdir + '/priceElasHouseholds_C_type1.png')
@@ -318,7 +319,7 @@ index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quan
 fig, axes = plt.subplots(1,3, figsize = (25,8))
 expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.firstType[0,0,:],priceElasHouseholdsN.firstType[1,0,:],priceElasHouseholdsN.firstType[2,0,:]], index = index).T
 expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.firstType[0,1,:],priceElasHouseholdsN.firstType[1,1,:],priceElasHouseholdsN.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.firstType[0,2,:],priceElasHouseholdsN.firstType[1,2,:],priceElasHouseholdsN.firstType[2,2,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholdsN.firstType[0,2,:],-priceElasHouseholdsN.firstType[1,2,:],-priceElasHouseholdsN.firstType[2,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
@@ -332,20 +333,21 @@ for i in range(len(plot_elas)):
         axes[i].set_xlabel('Month')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
-axes[0].set_ylim([-0.01,1.5])
-axes[1].set_ylim([-0.01,0.5])
-axes[2].set_ylim([-0.01,1.5])
+axes[0].set_ylim([-0.01,0.4])
+axes[1].set_ylim([-0.01,0.4])
+axes[2].set_ylim([-0.01,0.1])
 fig.suptitle('Type 1 Uncertainty Component of the Price elasticity for the Households Consumption')
 fig.tight_layout()
 fig.savefig(plotdir + '/priceElasHouseholds_N_type1.png')
 plt.close()
+
 
 ## Plot the exposure elasticity for consumption growth
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
 expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.secondType[0,0,:],priceElasHouseholdsN.secondType[1,0,:],priceElasHouseholdsN.secondType[2,0,:]], index = index).T
 expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.secondType[0,1,:],priceElasHouseholdsN.secondType[1,1,:],priceElasHouseholdsN.secondType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.secondType[0,2,:],priceElasHouseholdsN.secondType[1,2,:],priceElasHouseholdsN.secondType[2,2,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholdsN.secondType[0,2,:],-priceElasHouseholdsN.secondType[1,2,:],-priceElasHouseholdsN.secondType[2,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
@@ -359,16 +361,13 @@ for i in range(len(plot_elas)):
         axes[i].set_xlabel('Month')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
-axes[0].set_ylim([-0.01,2.0])
-axes[1].set_ylim([-0.01,0.5])
-axes[2].set_ylim([-0.01,2.0])
+axes[0].set_ylim([-0.01,0.4])
+axes[1].set_ylim([-0.01,0.4])
+axes[2].set_ylim([-0.01,0.1])
 fig.suptitle('Type 2 Uncertainty Component of the Price elasticity for the Households Consumption')
 fig.tight_layout()
 fig.savefig(plotdir + '/priceElasHouseholds_N_type2.png')
 plt.close()
-
-
-
 
 ## Plot the exposure elasticity for consumption growth
 index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
@@ -395,86 +394,4 @@ axes[2].set_ylim([-2.0,2.0])
 fig.suptitle('Type 1 Cost elasticity for the Experts Consumption using N instead of S')
 fig.tight_layout()
 fig.savefig(plotdir + '/costElasExperts_N_type1.png')
-plt.close()
-
-## Plot the exposure elasticity for consumption growth
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),costElasExpertsN.secondType[0,0,:],costElasExpertsN.secondType[1,0,:],costElasExpertsN.secondType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),costElasExpertsN.secondType[0,1,:],costElasExpertsN.secondType[1,1,:],costElasExpertsN.secondType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),costElasExpertsN.secondType[0,2,:],costElasExpertsN.secondType[1,2,:],costElasExpertsN.secondType[2,2,:]], index = index).T
-
-n_qt = len(quantile)
-plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
-shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
-
-for i in range(len(plot_elas)):
-    for j in range(n_qt):
-        sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Months')
-        axes[i].set_ylabel('Price elasticity')
-        axes[i].set_title('With respect to the ' + shock_name[i])
-axes[0].set_ylim([-2.0,2.0])
-axes[1].set_ylim([-2.0,2.0])
-axes[2].set_ylim([-2.0,2.0])
-fig.suptitle('Type 2 Cost elasticity for the Experts Consumption using N instead of S')
-fig.tight_layout()
-fig.savefig(plotdir + '/costElasExperts_N_type2.png')
-plt.close()
-
-
-## Plot the exposure elasticity for consumption growth
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),costElassHouseholdsN.firstType[0,0,:],costElassHouseholdsN.firstType[1,0,:],costElassHouseholdsN.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),costElassHouseholdsN.firstType[0,1,:],costElassHouseholdsN.firstType[1,1,:],costElassHouseholdsN.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),costElassHouseholdsN.firstType[0,2,:],costElassHouseholdsN.firstType[1,2,:],costElassHouseholdsN.firstType[2,2,:]], index = index).T
-
-n_qt = len(quantile)
-plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
-shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
-
-for i in range(len(plot_elas)):
-    for j in range(n_qt):
-        sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Month')
-        axes[i].set_ylabel('Price elasticity')
-        axes[i].set_title('With respect to the ' + shock_name[i])
-axes[0].set_ylim([-2.0,2.0])
-axes[1].set_ylim([-2.0,2.0])
-axes[2].set_ylim([-2.0,2.0])
-fig.suptitle('Type 1 Cost elasticity for the Households Consumption using N instead of S')
-fig.tight_layout()
-fig.savefig(plotdir + '/costElasHouseholds_N_type1.png')
-plt.close()
-
-## Plot the exposure elasticity for consumption growth
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),costElassHouseholdsN.secondType[0,0,:],costElassHouseholdsN.secondType[1,0,:],costElassHouseholdsN.secondType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),costElassHouseholdsN.secondType[0,1,:],costElassHouseholdsN.secondType[1,1,:],costElassHouseholdsN.secondType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),costElassHouseholdsN.secondType[0,2,:],costElassHouseholdsN.secondType[1,2,:],costElassHouseholdsN.secondType[2,2,:]], index = index).T
-
-n_qt = len(quantile)
-plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
-shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
-
-for i in range(len(plot_elas)):
-    for j in range(n_qt):
-        sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Month')
-        axes[i].set_ylabel('Price elasticity')
-        axes[i].set_title('With respect to the ' + shock_name[i])
-axes[0].set_ylim([-2.0,2.0])
-axes[1].set_ylim([-2.0,2.0])
-axes[2].set_ylim([-2.0,2.0])
-fig.suptitle('Type 2 Cost elasticity for the Households Consumption using N instead of S')
-fig.tight_layout()
-fig.savefig(plotdir + '/costElasHouseholds_N_type2.png')
 plt.close()
