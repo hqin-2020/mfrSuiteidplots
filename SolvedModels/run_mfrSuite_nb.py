@@ -148,10 +148,10 @@ start = time.time()
 
 bc = {}
 bc['a0']  = 0
-bc['first'] = np.matrix([1/3, 1/3, 1/3], 'd')
+bc['first'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['second'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['third'] = np.matrix([0.0, 0.0, 0.0], 'd')
-bc['level'] = np.matrix([0.0, 0.0, 0.0], 'd')
+bc['level'] = np.matrix([1/3, 1/3, 1/3], 'd')
 bc['natural'] = False
 
 Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48*4, dt = 1/4, perturb = 'Ce', bc = bc)
