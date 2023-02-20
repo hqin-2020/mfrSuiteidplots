@@ -154,7 +154,7 @@ bc['third'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['level'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['natural'] = False
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48*4, dt = 1/4, perturb = 'Ce', bc = {'natural': True})
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ce', bc = bc)
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
 
