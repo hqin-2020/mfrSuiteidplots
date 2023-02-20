@@ -141,13 +141,9 @@ def createMatrixInner(stateMat, upperLims, lowerLims, S, N, dVec, increVec, sigm
 
                 if ( (not natural) and (not corner) ):
                     ####If not using natural bdries, set as specified
-                    if n == 0:
-                        vals.append( level[0,0] + first[0,n] / dVec[0,n] )
-                        rowInd.append( i ); colInd.append( i );
-                    else:
-                        vals.append( first[0,n] / dVec[0,n] )
-                        rowInd.append( i ); colInd.append( i );
-
+                    vals.append( level[0,n] + first[0,n] / dVec[0,n] )
+                    rowInd.append( i ); colInd.append( i );
+            
                     vals.append( -first[0,n] / dVec[0,n] )
                     rowInd.append( i ); colInd.append( i - increVec[0,n] );
 
@@ -169,13 +165,10 @@ def createMatrixInner(stateMat, upperLims, lowerLims, S, N, dVec, increVec, sigm
                 atBoundsInd[n] = -1
 
                 if ( (not natural) and (not corner) ):
-                    if n == 0:
-                        ####If not using natural bdries, set as specified
-                        vals.append( level[0,0] - first[0,n] / dVec[0,n]  )
-                        rowInd.append( i ); colInd.append( i );
-                    else:
-                        vals.append( - first[0,n] / dVec[0,n]  )
-                        rowInd.append( i ); colInd.append( i );
+                    
+                    ####If not using natural bdries, set as specified
+                    vals.append( level[0,n] - first[0,n] / dVec[0,n]  )
+                    rowInd.append( i ); colInd.append( i );
 
                     vals.append( first[0,n] / dVec[0,n]  )
                     rowInd.append( i ); colInd.append( i + increVec[0,n]);
@@ -394,7 +387,7 @@ def createMatrix(upperLims, lowerLims, S, N, dVec, increVec, stateMat, model,bc,
 
     if not bc['natural']:
         a0 = bc['a0']
-        level = bc['level']
+        level = np.matrix(bc['level']/N,'d')
         first = bc['first']
         second = np.matrix([0]); 
         third = np.matrix([0]);

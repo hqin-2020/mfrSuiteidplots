@@ -131,7 +131,7 @@ dt = 1
 bc = {}
 bc['a0']  = 0.
 bc['first'] = np.matrix([0., 0., 0.], 'd')
-bc['level'] = np.matrix([1.])
+bc['level'] = 1.0
 bc['natural'] = False
 
 muXs = []; stateVols = []
