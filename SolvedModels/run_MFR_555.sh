@@ -35,27 +35,27 @@ do
                             mkdir -p ./job-outs/$domain_folder/$model_folder
                             mkdir -p ./bash/$domain_folder/$model_folder
 
-                            touch ./bash/$domain_folder/$model_folder/runyear.sh
-                            tee ./bash/$domain_folder/$model_folder/runyear.sh << EOF
+                            touch ./bash/$domain_folder/$model_folder/run555.sh
+                            tee ./bash/$domain_folder/$model_folder/run555.sh << EOF
 #! /bin/bash
 
 #SBATCH --account=pi-lhansen
-#SBATCH --job-name=runyear
-#SBATCH --output=./job-outs/$domain_folder/$model_folder/runyear.out
-#SBATCH --error=./job-outs/$domain_folder/$model_folder/runyear.err
+#SBATCH --job-name=run555
+#SBATCH --output=./job-outs/$domain_folder/$model_folder/run555.out
+#SBATCH --error=./job-outs/$domain_folder/$model_folder/run555.err
 #SBATCH --time=0-12:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mem-per-cpu=3000
+#SBATCH --cpus-per-task=14
+#SBATCH --mem-per-cpu=4000
 
 module load python/anaconda-2021.05
 
-python3 /project/lhansen/mfrSuiteidplots/SolvedModels/run_mfrSuite.py --chiUnderline ${chiUnderline} --a_e ${a_e} --a_h ${a_h} --gamma_e ${gamma_e} --gamma_h ${gamma_h} --psi_e ${psi_e} --psi_h ${psi_h} \
+python3 /project/lhansen/mfrSuiteidplots/SolvedModels/run_mfrSuite_555.py --chiUnderline ${chiUnderline} --a_e ${a_e} --a_h ${a_h} --gamma_e ${gamma_e} --gamma_h ${gamma_h} --psi_e ${psi_e} --psi_h ${psi_h} \
                                                     --nV ${nV} --nVtilde ${nVtilde} --V_bar ${V_bar} --Vtilde_bar ${Vtilde_bar} --sigma_V_norm ${sigma_V_norm} --sigma_Vtilde_norm ${sigma_Vtilde_norm} \
 
 EOF
-                            sbatch ./bash/$domain_folder/$model_folder/runyear.sh
+                            sbatch ./bash/$domain_folder/$model_folder/run555.sh
                         done
                     done
                 done
