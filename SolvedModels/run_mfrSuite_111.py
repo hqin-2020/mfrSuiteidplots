@@ -120,7 +120,7 @@ chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1)
 folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h
 
 params['preLoad']          = folder_name 
-folder_name = folder_name + '_101010'
+folder_name = folder_name + '_111'
 params['folderName']        = folder_name
 
 #### Now, create a Model
@@ -147,7 +147,7 @@ start = time.time()
 
 bc = {}
 bc['a0']  = 0
-bc['first'] = np.matrix([1.0, 1.0, 1.0], 'd')
+bc['first'] = np.matrix([0.1, 0.1, 0.1], 'd')
 bc['second'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['third'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['level'] = np.matrix([0.0, 0.0, 0.0], 'd')
