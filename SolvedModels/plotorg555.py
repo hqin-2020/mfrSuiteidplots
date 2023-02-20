@@ -133,6 +133,11 @@ HouseholdsPriceConsumption = pickle.load(open(os.getcwd()+"/" + folder_name + "/
 os.makedirs(os.getcwd()+"/plots/" + folder_name, exist_ok = True)
 plotdir = os.getcwd()+"/plots/" + folder_name
 
+np.savetxt(plotdir + 'ExpertsExpoConsumption.txt', np.mean(ExpertsExpoConsumption.firstType[0,0,:]))
+np.savetxt(plotdir + 'ExpertsPriceConsumption.txt', np.mean(ExpertsPriceConsumption.firstType[0,0,:]))
+np.savetxt(plotdir + 'HouseholdsExpoConsumption.txt', np.mean(HouseholdsExpoConsumption.firstType[0,0,:]))
+np.savetxt(plotdir + 'HouseholdsPriceConsumption.txt', np.mean(HouseholdsPriceConsumption.firstType[0,0,:]))
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
