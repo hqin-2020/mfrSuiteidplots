@@ -148,6 +148,7 @@ bc = {}
 bc['a0']  = 0
 bc['first'] = np.matrix([0.5, 0.5, 0.5], 'd')
 bc['second'] = np.matrix([0.0, 0.0, 0.0], 'd')
+bc['third'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['level'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['natural'] = False
 
