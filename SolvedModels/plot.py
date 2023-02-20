@@ -144,10 +144,10 @@ expoElasHouseholdsN = model_ela_sol['expoElasHouseholdsN']
 priceElasHouseholdsN = model_ela_sol['priceElasHouseholdsN']
 costElasHouseholdsN = model_ela_sol['costElasHouseholdsN']
 
-np.savetxt(plotdir + '/expoElasExperts.txt', np.mean(expoElasExperts.firstType[0,0,:]))
-np.savetxt(plotdir + '/priceElasExperts.txt', np.mean(priceElasExperts.firstType[0,0,:]))
-np.savetxt(plotdir + '/expoElasHouseholds.txt', np.mean(expoElasHouseholds.firstType[0,0,:]))
-np.savetxt(plotdir + '/priceElasHouseholds.txt', np.mean(priceElasHouseholds.firstType[0,0,:]))
+np.savetxt(plotdir + '/expoElasExperts.txt', expoElasExperts.firstType[0,0,:])
+np.savetxt(plotdir + '/priceElasExperts.txt', priceElasExperts.firstType[0,0,:])
+np.savetxt(plotdir + '/expoElasHouseholds.txt', expoElasHouseholds.firstType[0,0,:])
+np.savetxt(plotdir + '/priceElasHouseholds.txt', priceElasHouseholds.firstType[0,0,:])
 
 import matplotlib.pyplot as plt
 import seaborn as sns
