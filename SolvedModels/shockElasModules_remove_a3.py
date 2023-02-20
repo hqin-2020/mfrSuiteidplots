@@ -559,4 +559,4 @@ def computeElas(stateMat, model, bc, x0, usePardiso = False, iparms = {}, better
     priceElas.firstType = expoElas.firstType - costElas.firstType
     priceElas.secondType = expoElas.secondType - costElas.secondType
 
-    return expoElas, priceElas, linSys1, linSys2
+    return expoElas, priceElas, linSys1, linSys2, costElas
