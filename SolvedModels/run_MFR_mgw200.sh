@@ -35,18 +35,18 @@ do
                             mkdir -p ./job-outs/$domain_folder/$model_folder
                             mkdir -p ./bash/$domain_folder/$model_folder
 
-                            touch ./bash/$domain_folder/$model_folder/runmgw.sh
-                            tee ./bash/$domain_folder/$model_folder/runmgw.sh << EOF
+                            touch ./bash/$domain_folder/$model_folder/runmgw200.sh
+                            tee ./bash/$domain_folder/$model_folder/runmgw200.sh << EOF
 #! /bin/bash
 
 #SBATCH --account=pi-lhansen
-#SBATCH --job-name=runmgw
-#SBATCH --output=./job-outs/$domain_folder/$model_folder/runmgw.out
-#SBATCH --error=./job-outs/$domain_folder/$model_folder/runmgw.err
+#SBATCH --job-name=runmgw200
+#SBATCH --output=./job-outs/$domain_folder/$model_folder/runmgw200.out
+#SBATCH --error=./job-outs/$domain_folder/$model_folder/runmgw200.err
 #SBATCH --time=0-12:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=3
 #SBATCH --mem-per-cpu=10000
 
 module load python/anaconda-2021.05
@@ -55,7 +55,7 @@ python3 /project/lhansen/mfrSuiteidplots/SolvedModels/run_mfrSuite_mgw200.py --c
                                                     --nV ${nV} --nVtilde ${nVtilde} --V_bar ${V_bar} --Vtilde_bar ${Vtilde_bar} --sigma_V_norm ${sigma_V_norm} --sigma_Vtilde_norm ${sigma_Vtilde_norm} \
 
 EOF
-                            sbatch ./bash/$domain_folder/$model_folder/runmgw.sh
+                            sbatch ./bash/$domain_folder/$model_folder/runmgw200.sh
                         done
                     done
                 done
