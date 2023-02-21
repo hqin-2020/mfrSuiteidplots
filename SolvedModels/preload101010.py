@@ -124,7 +124,7 @@ folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + 
 modelsol = pickle.load(open(os.getcwd()+"/" + folder_name +"/model_ela_sol.pkl", "rb"))
 
 T = 48*4
-dt = 1/1
+dt = 1/4
 
 bc = {}
 bc['a0']  = 0
