@@ -156,20 +156,20 @@ pd.options.display.float_format = '{:.3g}'.format
 sns.set(font_scale = 1.5)
 T = 48
 # Calculate the shock elasticity at 0.25, 0.5 and 0.75 quantile for W
-quantile = [0.25, 0.5, 0.75]
+quantile = [0.1, 0.25, 0.5, 0.75, 0.9]
 
 
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
+index = ['T','Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,0,:],expoElasExperts.firstType[1,0,:],expoElasExperts.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,1,:],expoElasExperts.firstType[1,1,:],expoElasExperts.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,2,:],expoElasExperts.firstType[1,2,:],expoElasExperts.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,0,:],expoElasExperts.firstType[1,0,:],expoElasExperts.firstType[2,0,:],expoElasExperts.firstType[3,0,:],expoElasExperts.firstType[4,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,1,:],expoElasExperts.firstType[1,1,:],expoElasExperts.firstType[2,1,:],expoElasExperts.firstType[3,1,:],expoElasExperts.firstType[4,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),expoElasExperts.firstType[0,2,:],expoElasExperts.firstType[1,2,:],expoElasExperts.firstType[2,2,:],expoElasExperts.firstType[3,2,:],expoElasExperts.firstType[4,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
+qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -186,17 +186,17 @@ fig.savefig(plotdir + '/expoElasExperts_C_type1.png')
 plt.close()
 
 
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
+index = ['T','Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,0,:],expoElasHouseholds.firstType[1,0,:],expoElasHouseholds.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,1,:],expoElasHouseholds.firstType[1,1,:],expoElasHouseholds.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,2,:],expoElasHouseholds.firstType[1,2,:],expoElasHouseholds.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,0,:],expoElasHouseholds.firstType[1,0,:],expoElasHouseholds.firstType[2,0,:],expoElasHouseholds.firstType[3,0,:],expoElasHouseholds.firstType[4,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,1,:],expoElasHouseholds.firstType[1,1,:],expoElasHouseholds.firstType[2,1,:],expoElasHouseholds.firstType[3,1,:],expoElasHouseholds.firstType[4,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),expoElasHouseholds.firstType[0,2,:],expoElasHouseholds.firstType[1,2,:],expoElasHouseholds.firstType[2,2,:],expoElasHouseholds.firstType[3,2,:],expoElasHouseholds.firstType[4,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
+qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -212,17 +212,17 @@ fig.tight_layout()
 fig.savefig(plotdir + '/expoElasHouseholdss_C_type1.png')
 plt.close()
 
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
+index = ['T','Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasExperts.firstType[0,0,:],priceElasExperts.firstType[1,0,:],priceElasExperts.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasExperts.firstType[0,1,:],priceElasExperts.firstType[1,1,:],priceElasExperts.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasExperts.firstType[0,2,:],-priceElasExperts.firstType[1,2,:],-priceElasExperts.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasExperts.firstType[0,0,:],priceElasExperts.firstType[1,0,:],priceElasExperts.firstType[2,0,:],priceElasExperts.firstType[3,0,:],priceElasExperts.firstType[4,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasExperts.firstType[0,1,:],priceElasExperts.firstType[1,1,:],priceElasExperts.firstType[2,1,:],priceElasExperts.firstType[3,1,:],priceElasExperts.firstType[4,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasExperts.firstType[0,2,:],-priceElasExperts.firstType[1,2,:],-priceElasExperts.firstType[2,2,:],-priceElasExperts.firstType[3,2,:],-priceElasExperts.firstType[4,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
+qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -238,17 +238,17 @@ fig.tight_layout()
 fig.savefig(plotdir + '/priceElasExperts_C_type1.png')
 plt.close()
 
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
+index = ['T','Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholds.firstType[0,0,:],priceElasHouseholds.firstType[1,0,:],priceElasHouseholds.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholds.firstType[0,1,:],priceElasHouseholds.firstType[1,1,:],priceElasHouseholds.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholds.firstType[0,2,:],-priceElasHouseholds.firstType[1,2,:],-priceElasHouseholds.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholds.firstType[0,0,:],priceElasHouseholds.firstType[1,0,:],priceElasHouseholds.firstType[2,0,:],priceElasHouseholds.firstType[3,0,:],priceElasHouseholds.firstType[4,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholds.firstType[0,1,:],priceElasHouseholds.firstType[1,1,:],priceElasHouseholds.firstType[2,1,:],priceElasHouseholds.firstType[3,1,:],priceElasHouseholds.firstType[4,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholds.firstType[0,2,:],-priceElasHouseholds.firstType[1,2,:],-priceElasHouseholds.firstType[2,2,:],-priceElasHouseholds.firstType[3,2,:],-priceElasHouseholds.firstType[4,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
+qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -265,17 +265,17 @@ fig.savefig(plotdir + '/priceElasHouseholds_C_type1.png')
 plt.close()
 
 ## Plot the exposure elasticity for consumption growth
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
+index = ['T','Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasExpertsN.firstType[0,0,:],priceElasExpertsN.firstType[1,0,:],priceElasExpertsN.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasExpertsN.firstType[0,1,:],priceElasExpertsN.firstType[1,1,:],priceElasExpertsN.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasExpertsN.firstType[0,2,:],-priceElasExpertsN.firstType[1,2,:],-priceElasExpertsN.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasExpertsN.firstType[0,0,:],priceElasExpertsN.firstType[1,0,:],priceElasExpertsN.firstType[2,0,:],priceElasExpertsN.firstType[3,0,:],priceElasExpertsN.firstType[4,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasExpertsN.firstType[0,1,:],priceElasExpertsN.firstType[1,1,:],priceElasExpertsN.firstType[2,1,:],priceElasExpertsN.firstType[3,1,:],priceElasExpertsN.firstType[4,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasExpertsN.firstType[0,2,:],-priceElasExpertsN.firstType[1,2,:],-priceElasExpertsN.firstType[2,2,:],-priceElasExpertsN.firstType[3,2,:],-priceElasExpertsN.firstType[4,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
+qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -292,17 +292,17 @@ fig.savefig(plotdir + '/priceElasExperts_N_type1.png')
 plt.close()
 
 ## Plot the exposure elasticity for consumption growth
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
+index = ['T','Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasExpertsN.secondType[0,0,:],priceElasExpertsN.secondType[1,0,:],priceElasExpertsN.secondType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasExpertsN.secondType[0,1,:],priceElasExpertsN.secondType[1,1,:],priceElasExpertsN.secondType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasExpertsN.secondType[0,2,:],-priceElasExpertsN.secondType[1,2,:],-priceElasExpertsN.secondType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasExpertsN.secondType[0,0,:],priceElasExpertsN.secondType[1,0,:],priceElasExpertsN.secondType[2,0,:],priceElasExpertsN.secondType[3,0,:],priceElasExpertsN.secondType[4,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasExpertsN.secondType[0,1,:],priceElasExpertsN.secondType[1,1,:],priceElasExpertsN.secondType[2,1,:],priceElasExpertsN.secondType[3,1,:],priceElasExpertsN.secondType[4,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasExpertsN.secondType[0,2,:],-priceElasExpertsN.secondType[1,2,:],-priceElasExpertsN.secondType[2,2,:],-priceElasExpertsN.secondType[3,2,:],-priceElasExpertsN.secondType[4,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
+qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -320,17 +320,17 @@ plt.close()
 
 
 ## Plot the exposure elasticity for consumption growth
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
+index = ['T','Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.firstType[0,0,:],priceElasHouseholdsN.firstType[1,0,:],priceElasHouseholdsN.firstType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.firstType[0,1,:],priceElasHouseholdsN.firstType[1,1,:],priceElasHouseholdsN.firstType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholdsN.firstType[0,2,:],-priceElasHouseholdsN.firstType[1,2,:],-priceElasHouseholdsN.firstType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.firstType[0,0,:],priceElasHouseholdsN.firstType[1,0,:],priceElasHouseholdsN.firstType[2,0,:],priceElasHouseholdsN.firstType[3,0,:],priceElasHouseholdsN.firstType[4,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.firstType[0,1,:],priceElasHouseholdsN.firstType[1,1,:],priceElasHouseholdsN.firstType[2,1,:],priceElasHouseholdsN.firstType[3,1,:],priceElasHouseholdsN.firstType[4,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholdsN.firstType[0,2,:],-priceElasHouseholdsN.firstType[1,2,:],-priceElasHouseholdsN.firstType[2,2,:],-priceElasHouseholdsN.firstType[3,2,:],-priceElasHouseholdsN.firstType[4,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
+qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -348,17 +348,17 @@ plt.close()
 
 
 ## Plot the exposure elasticity for consumption growth
-index = ['T','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
+index = ['T','Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
 fig, axes = plt.subplots(1,3, figsize = (25,8))
-expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.secondType[0,0,:],priceElasHouseholdsN.secondType[1,0,:],priceElasHouseholdsN.secondType[2,0,:]], index = index).T
-expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.secondType[0,1,:],priceElasHouseholdsN.secondType[1,1,:],priceElasHouseholdsN.secondType[2,1,:]], index = index).T
-expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholdsN.secondType[0,2,:],-priceElasHouseholdsN.secondType[1,2,:],-priceElasHouseholdsN.secondType[2,2,:]], index = index).T
+expo_elas_shock_0 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.secondType[0,0,:],priceElasHouseholdsN.secondType[1,0,:],priceElasHouseholdsN.secondType[2,0,:],priceElasHouseholdsN.secondType[3,0,:],priceElasHouseholdsN.secondType[4,0,:]], index = index).T
+expo_elas_shock_1 = pd.DataFrame([np.arange(T),priceElasHouseholdsN.secondType[0,1,:],priceElasHouseholdsN.secondType[1,1,:],priceElasHouseholdsN.secondType[2,1,:],priceElasHouseholdsN.secondType[3,1,:],priceElasHouseholdsN.secondType[4,1,:]], index = index).T
+expo_elas_shock_2 = pd.DataFrame([np.arange(T),-priceElasHouseholdsN.secondType[0,2,:],-priceElasHouseholdsN.secondType[1,2,:],-priceElasHouseholdsN.secondType[2,2,:],-priceElasHouseholdsN.secondType[3,2,:],-priceElasHouseholdsN.secondType[4,2,:]], index = index).T
 
 n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
-qt = ['Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile']
-colors = ['green','red','blue']
+qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):

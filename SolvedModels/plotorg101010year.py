@@ -163,7 +163,7 @@ colors = ['green','yellow','red','blue','purple']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Quarters')
+        axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.05,0.1])
@@ -190,7 +190,7 @@ colors = ['green','yellow','red','blue','purple']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Quarters')
+        axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Exposure elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.001,0.1])
@@ -216,7 +216,7 @@ colors = ['green','yellow','red','blue','purple']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Quarters')
+        axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.05,0.4])
@@ -242,7 +242,7 @@ colors = ['green','yellow','red','blue','purple']
 for i in range(len(plot_elas)):
     for j in range(n_qt):
         sns.lineplot(data = plot_elas[i],  x = 'T', y = qt[j], ax=axes[i], color = colors[j], label = qt[j])
-        axes[i].set_xlabel('Quarters')
+        axes[i].set_xlabel('Years')
         axes[i].set_ylabel('Price elasticity')
         axes[i].set_title('With respect to the ' + shock_name[i])
 axes[0].set_ylim([-0.005,0.5])
