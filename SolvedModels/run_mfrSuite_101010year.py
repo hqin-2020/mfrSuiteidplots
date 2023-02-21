@@ -117,11 +117,11 @@ a_e = str("{:0.3f}".format(params['a_e'])).replace('.', '', 1)
 a_h = str("{:0.3f}".format(params['a_h'])).replace('.', '', 1) 
 chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1) 
 
-folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h 
+folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h
 
 params['preLoad']          = folder_name 
-folder_name = folder_name + '_nb'
-params['folderName']       = folder_name
+folder_name = folder_name + '_101010_year'
+params['folderName']        = folder_name
 
 #### Now, create a Model
 Model = m.Model(params)
@@ -131,7 +131,6 @@ Model = m.Model(params)
 
 #### This step is very simple: use the .solve() method.
 start = time.time()
-
 Model.solve()
 Model.printInfo() ## This step is optional: it prints out information regarding time, number of iterations, etc.
 Model.printParams() ## This step is optional: it prints out the parameteres used.
@@ -148,20 +147,21 @@ start = time.time()
 
 bc = {}
 bc['a0']  = 0
-bc['first'] = np.matrix([0.0, 0.0, 0.0], 'd')
+bc['first'] = np.matrix([1.0, 1.0, 1.0], 'd')
 bc['second'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['third'] = np.matrix([0.0, 0.0, 0.0], 'd')
-bc['level'] = np.matrix([1/3, 1/3, 1/3], 'd')
+bc['level'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['natural'] = False
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.1, 0.25, 0.5, 0.75, 0.9]}, T = 48*4, dt = 1/4, perturb = 'Ce', bc = bc)
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.1,0.25, 0.5, 0.75,0.9]}, T = 48, dt = 1, perturb = 'Ce', bc = bc)
+
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasExperts, file)
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.1, 0.25, 0.5, 0.75, 0.9]}, T = 48*4, dt = 1/4, perturb = 'Ch', bc = bc)
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.1,0.25, 0.5, 0.75,0.9]}, T = 48, dt = 1, perturb = 'Ch', bc = bc)
 
 with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
@@ -172,8 +172,11 @@ end = time.time()
 
 solve_time = '{:.4f}'.format((end - start)/60)
 MFR_time_info = {'solve_time': solve_time}
+
 with open(os.getcwd()+"/" + folder_name + "/Ela_time_info.json", "w") as f:
     json.dump(MFR_time_info,f)
+
+
 Model.dumpData()
 # %%
 

@@ -154,14 +154,14 @@ bc['third'] = np.matrix([0.0, 0.0, 0.0], 'd')
 bc['level'] = np.matrix([1/3, 1/3, 1/3], 'd')
 bc['natural'] = False
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ce', bc = bc)
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.1, 0.25, 0.5, 0.75, 0.9]}, T = 48, dt = 1, perturb = 'Ce', bc = bc)
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasExperts, file)
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ch', bc = bc)
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.1, 0.25, 0.5, 0.75, 0.9]}, T = 48, dt = 1, perturb = 'Ch', bc = bc)
 
 with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
@@ -178,7 +178,7 @@ Model.dumpData()
 # %%
 
 ##### This method can only be called after the model is solved.
-pcts = {'W':[.5],'Z':[.5],'V':[.25,.5,.75]}
+pcts = {'W':[.5],'Z':[.5],'V':[0.1,.25,.5,.75,0.9]}
 
 # Use defaults starting points
 points = np.matrix([])
