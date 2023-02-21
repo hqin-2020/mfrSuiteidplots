@@ -158,7 +158,7 @@ n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
 qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
-colors = ['green','yello','red','blue','purple']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -185,7 +185,7 @@ n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
 qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
-colors = ['green','yello','red','blue','purple']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -211,7 +211,7 @@ n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
 qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
-colors = ['green','yello','red','blue','purple']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
@@ -237,7 +237,7 @@ n_qt = len(quantile)
 plot_elas = [expo_elas_shock_0, expo_elas_shock_1, expo_elas_shock_2]
 shock_name = ['TFP shock', 'growth rate shock', 'aggregate stochastic volitility shock']
 qt = ['Aggregate Volatility 0.1 quantile','Aggregate Volatility 0.25 quantile','Aggregate Volatility 0.5 quantile','Aggregate Volatility 0.75 quantile','Aggregate Volatility 0.9 quantile']
-colors = ['green','yello','red','blue','purple']
+colors = ['green','yellow','red','blue','purple']
 
 for i in range(len(plot_elas)):
     for j in range(n_qt):
