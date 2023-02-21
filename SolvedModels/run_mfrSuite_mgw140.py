@@ -34,7 +34,7 @@ params['nShocks']           = 3
 params['numSds']            = 5
 params['uselogW']           = 0
 
-params['nWealth']           = 160
+params['nWealth']           = 140
 params['nZ']                = 30
 params['nV']                = args.nV
 params['nVtilde']           = args.nVtilde
@@ -117,7 +117,7 @@ a_e = str("{:0.3f}".format(params['a_e'])).replace('.', '', 1)
 a_h = str("{:0.3f}".format(params['a_h'])).replace('.', '', 1) 
 chiUnderline = str("{:0.3f}".format(params['chiUnderline'])).replace('.', '', 1) 
 
-folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h + '_mgw160'
+folder_name = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_psi_e_' + psi_e + '_psi_h_' + psi_h + '_mgw140'
 
 # params['preLoad']          = folder_name 
 params['folderName']        = folder_name
