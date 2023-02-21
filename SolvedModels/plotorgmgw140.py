@@ -145,7 +145,7 @@ import seaborn as sns
 import pandas as pd
 pd.options.display.float_format = '{:.3g}'.format
 sns.set(font_scale = 1.5)
-T = 48
+T = 48*4
 # Calculate the shock elasticity at 0.25, 0.5 and 0.75 quantile for W
 quantile = [0.25, 0.5, 0.75]
 
