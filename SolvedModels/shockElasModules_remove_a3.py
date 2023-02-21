@@ -387,7 +387,7 @@ def createMatrix(upperLims, lowerLims, S, N, dVec, increVec, stateMat, model,bc,
 
     if not bc['natural']:
         a0 = bc['a0']
-        level = np.matrix(np.repeat(bc['level']/N,N),'d')
+        level = np.matrix(np.repeat(bc['level'],N),'d')
         first = bc['first']
         second = np.matrix([0]); 
         third = np.matrix([0]);
