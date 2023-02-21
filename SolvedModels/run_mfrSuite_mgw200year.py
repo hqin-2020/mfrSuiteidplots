@@ -145,7 +145,7 @@ with open(os.getcwd()+"/" + folder_name + "/MFR_time_info.json", "w") as f:
 # %%
 start = time.time()
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ce', bc = {'natural': True})
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.1, 0.25, 0.5, 0.75, 0.9]}, T = 48, dt = 1, perturb = 'Ce', bc = {'natural': True})
 
 with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
@@ -153,7 +153,7 @@ with open(os.getcwd()+"/" + folder_name + "/ExpertsExpoConsumption.pkl", 'wb') a
 with open(os.getcwd()+"/" + folder_name + "/ExpertsPriceConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.priceElasExperts, file)
 
-Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.25, 0.5, 0.75]}, T = 48, dt = 1, perturb = 'Ch', bc = {'natural': True})
+Model.computeShockElas(pcts = {'W':[.5], 'Z': [0.5], 'V': [0.1, 0.25, 0.5, 0.75, 0.9]}, T = 48, dt = 1, perturb = 'Ch', bc = {'natural': True})
 
 with open(os.getcwd()+"/" + folder_name + "/HouseholdsExpoConsumption.pkl", 'wb') as file:   
     pickle.dump(Model.expoElas, file)
@@ -174,11 +174,7 @@ Model.dumpData()
 
 
 ##### This method can only be called after the model is solved.
-pcts = {'W':[.5],'Z':[.5],'V':[.25,.5,.75]}
-
-# 30 year time periods
-T = 48
-dt = 1
+pcts = {'W':[.5],'Z':[.5],'V':[0.1, 0.25, 0.5, 0.75, 0.9]}
 
 # Natural boundatry conditions
 bc = {'natural':True}
